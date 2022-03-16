@@ -27,7 +27,7 @@
 					<% else %>
 						<%= form_with model: author, method: :patch do |form| %>
 							<%= form.hidden_field :is_verified, :value => true%>
-							<%= form.button 'Verify', data: {confirm: "Verify author #{author.name}?"}%>
+							<%= form.button 'Verify', data: {confirm: "Verify author #{author.name}?"}, class: 'verify-btn'%>
 						<% end %>
 					<% end %>
 				</td>
