@@ -1,0 +1,46 @@
+<h1>Hello from show page</h1>
+<table class="table-show">
+	<tr>
+		<td>
+			Title:
+		</td>
+		<td colspan='2'>
+			<%= @author.name%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Address:
+		</td>
+		<td colspan='2'>
+			<%= @author.address%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Date Verified:
+		</td>
+		<td colspan='2'>
+			<%= @author.date_verified%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Verified:
+		</td>
+		<td >
+			<%= @author.is_verified%>
+		</td>
+		<% if !@author.is_verified %>
+			<td>
+				<%= form_with model: @author, method: :patch do |form| %>
+					<%= form.hidden_field :is_verified, :value => true%>
+					<%= form.button 'Verify', data: {confirm: 'Verify author?'}%>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+	<tr>
+	</tr>
+</table>
+<%= link_to 'Go to authors page', authors_path%>

@@ -1,0 +1,24 @@
+<% if author.errors.any? %>
+	<% author.errors.each do |error| %>
+		<p>
+			<%= error.full_message %>
+		</p>
+	<% end %>
+<% end %>
+<%= form_with model: author do |form| %>
+	<div class="form-field">
+		<%= form.label :name %>
+		<%= form.text_field :name %>
+	</div>
+	<div class="form-field">
+		<%= form.label :address %>
+		<%= form.text_field :address %>
+	</div>
+	<div class="form-field">
+		<%= form.label :date_verified %>
+		<%= form.date_select :date_verified %>
+	</div>
+	<button class="action">
+		<%= form.submit class: 'submit-btn'%>
+	</button>
+<% end %>

@@ -1,0 +1,49 @@
+<h1>Hello from index page</h1>
+<table class='table'>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Date Verified</th>
+			<th>Verified</th>
+			<th colspan='3'>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @authors.each do |author| %>
+			<tr>
+				<td>
+					<%= author.name %>
+				</td>
+				<td>
+					<%= author.address %>
+				</td>
+				<td>
+					<%= author.date_verified %>
+				</td>
+				<td>
+					<% if author.is_verified %>
+						<%= author.is_verified %>
+					<% else %>
+						<%= form_with model: author, method: :patch do |form| %>
+							<%= form.hidden_field :is_verified, :value => true%>
+							<%= form.button 'Verify', data: {confirm: "Verify author #{author.name}?"}%>
+						<% end %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to 'Show', author_path(author), class: 'link' %>
+				</td>
+				<td>
+					<%= link_to 'Delete', author, method: :delete, data: {confirm: "Remove author #{author.name}?"}, class: 'link'%>
+				</td>
+				<td>
+					<%= link_to 'Edit', edit_author_path(author), class: 'link' %>
+				</td>
+			</tr>
+		<% end%>
+	</tbody>
+</table>
+<button class='btn'>
+	<%= link_to 'Create New Author', new_authors_path, class: 'link' %>
+</button>
