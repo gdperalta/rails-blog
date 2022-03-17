@@ -47,9 +47,9 @@ h1 {
 	color: white;
 	border: 0;
 	font-size: inherit;
+	text-decoration: underline;
 	&:hover {
 		cursor: pointer;
-		text-decoration: underline;
 	}
 }
 
