@@ -31,6 +31,13 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def verify
+    @author.is_verified = true
+    @author.date_verified = Date.today.to_s
+    @author.save
+    redirect_to authors_path
+  end
+
   def destroy
     @author.destroy
     redirect_to authors_path

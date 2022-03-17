@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'authors/:id', to: 'authors#show', as: 'author'
   get 'authors/:id/edit', to: 'authors#edit', as: 'edit_author'
   patch 'authors/:id', to: 'authors#update'
+  patch 'authors/verify/:id', to: 'authors#verify', as: 'verify_author'
   delete 'authors/:id', to: 'authors#destroy'
 
   root to: 'articles#index'
