@@ -4,7 +4,6 @@
 		<tr>
 			<th>Name</th>
 			<th>Address</th>
-			<th>Date Verified</th>
 			<th>Verified</th>
 			<th colspan='3'>Actions</th>
 		</tr>
@@ -18,19 +17,15 @@
 				<td>
 					<%= author.address %>
 				</td>
-				<td>
-					<%= author.date_verified %>
-				</td>
-				<td>
-					<% if author.is_verified %>
-						<%= author.is_verified %>
-					<% else %>
-						<%= form_with model: author, method: :patch do |form| %>
-							<%= form.hidden_field :is_verified, :value => true%>
-							<%= form.button 'Verify', data: {confirm: "Verify author #{author.name}?"}, class: 'verify-btn'%>
-						<% end %>
-					<% end %>
-				</td>
+				<% if author.is_verified %>
+					<td>
+						<%= author.date_verified %>
+					</td>
+				<% else %>
+					<td>
+						<%= link_to 'Verify', verify_author_path(author), method: :patch, data: {confirm: "Verify author #{author.name}?"}, class: 'link'%>
+					</td>
+				<% end %>
 				<td>
 					<%= link_to 'Show', author_path(author), class: 'link' %>
 				</td>

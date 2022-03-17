@@ -18,26 +18,19 @@
 	</tr>
 	<tr>
 		<td>
-			Date Verified:
-		</td>
-		<td colspan='2'>
-			<%= @author.date_verified%>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			Verified:
 		</td>
-		<td >
-			<%= @author.is_verified%>
-		</td>
-		<% if !@author.is_verified %>
+		<% if @author.is_verified %>
 			<td>
-				<%= form_with model: @author, method: :patch do |form| %>
-					<%= form.hidden_field :is_verified, :value => true%>
-					<%= form.button 'Verify', data: {confirm: 'Verify author?'}%>
-				<% end %>
+				<%= @author.date_verified%>
 			</td>
+		<% else %>
+			<td>Not Verified</td>
+			<% if false %>
+				<td>
+					<%= link_to 'Verify Author', verify_author_path(@author), method: :patch, data: {confirm: "Verify author #{@author.name}?"}, class: 'verify-btn'%>
+				</td>
+			<% end %>
 		<% end %>
 	</tr>
 	<tr>
