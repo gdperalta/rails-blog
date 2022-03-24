@@ -40,6 +40,8 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to new_article_path
   end
 
   def article_params
