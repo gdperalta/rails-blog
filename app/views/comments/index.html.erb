@@ -1,0 +1,21 @@
+<h2>@article.title</h2>
+<h2>Comments</h2>
+<table>
+	<thead>
+		<tr>
+			Comment Body
+		</tr>
+		<tr>
+			Action
+		</tr>
+	</thead>
+	<tbody>
+		<% @comments.each do |comment| %>
+			<tr>
+				<td>
+					<%= comment.body %>
+				</td>
+			</tr>
+		<% end%>
+	</tbody>
+</table>
