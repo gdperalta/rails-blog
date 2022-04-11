@@ -34,7 +34,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
 end
-gem 'net-smtp'
+# gem 'net-smtp'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
