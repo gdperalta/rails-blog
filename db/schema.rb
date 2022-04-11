@@ -10,16 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_114345) do
+ActiveRecord::Schema.define(version: 2022_04_05_115029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "article_advertisements", force: :cascade do |t|
+    t.date "advertisement_date"
+    t.bigint "article_id", null: false
+    t.bigint "advertisement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["advertisement_id"], name: "index_article_advertisements_on_advertisement_id"
+    t.index ["article_id"], name: "index_article_advertisements_on_article_id"
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "author"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -39,5 +56,31 @@ ActiveRecord::Schema.define(version: 2022_03_17_114345) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "date_assigned"
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "article_advertisements", "advertisements"
+  add_foreign_key "article_advertisements", "articles"
   add_foreign_key "comments", "articles"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
 end
