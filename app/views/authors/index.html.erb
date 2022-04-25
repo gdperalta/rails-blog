@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= render 'home/header' %>
+<% end %>
 <h1>Hello from index page</h1>
 <table class='table'>
 	<thead>
@@ -23,7 +26,7 @@
 					</td>
 				<% else %>
 					<td>
-						<%= link_to 'Verify', verify_author_path(author), method: :patch, data: {confirm: "Verify author #{author.name}?"}, class: 'link'%>
+						<%= link_to 'Verify', author_verify_path(author), method: :patch, data: {confirm: "Verify author #{author.name}?"}, class: 'link'%>
 					</td>
 				<% end %>
 				<td>
@@ -40,5 +43,5 @@
 	</tbody>
 </table>
 <button class='btn'>
-	<%= link_to 'Create New Author', new_authors_path, class: 'link' %>
+	<%= link_to 'Create New Author', new_author_path, class: 'link' %>
 </button>
