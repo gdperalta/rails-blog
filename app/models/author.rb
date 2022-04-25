@@ -1,4 +1,5 @@
 class Author < ApplicationRecord
+  has_many :article
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true
   # validates :date_verified, presence: true
