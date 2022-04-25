@@ -36,6 +36,13 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
+  def template_new; end
+
+  def activities
+    @activities = []
+    6.times { @activities.push(ActivityGenerator::Client.randomize[:data]) }
+  end
+
   private
 
   def set_article
