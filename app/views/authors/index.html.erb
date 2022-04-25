@@ -26,7 +26,7 @@
 					</td>
 				<% else %>
 					<td>
-						<%= link_to 'Verify', author_verify_path(author), method: :patch, data: {confirm: "Verify author #{author.name}?"}, class: 'link'%>
+						<%= link_to 'Verify', author_verify_path(author), method: :patch, remote:true, data: {confirm: "Verify author #{author.name}?"}, class: 'link'%>
 					</td>
 				<% end %>
 				<td>
