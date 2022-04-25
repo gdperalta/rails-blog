@@ -1,7 +1,4 @@
 class Article < ApplicationRecord
-  # Not advisable
-  # Article.unscope to query without default_scope
-  # default_scope { where('LENGTH(title) > ?', min_length) }
   scope :long_title, ->(min_length) { where('LENGTH(title) > ?', min_length) }
   scope :has_a_new_comment, -> { joins(:comments).where("comments.created_at > '2020-03-18'") }
 
@@ -36,8 +33,4 @@ class Article < ApplicationRecord
   def formatted_title
     title.upcase
   end
-
-  # def self.long_title
-  #   where('LENGTH(title) > 5')
-  # end
 end
