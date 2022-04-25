@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_action :set_article, only: %i[show edit update verify destroy]
+  before_action :set_author, only: %i[show edit update destroy]
 
   def index
     @authors = Author.all
@@ -14,7 +14,7 @@ class AuthorsController < ApplicationController
   def edit; end
 
   def create
-    @author = Author.new(article_params)
+    @author = Author.new(author_params)
 
     if @author.save
       redirect_to @author
@@ -24,7 +24,7 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    if @author.update(article_params)
+    if @author.update(author_params)
       redirect_to @author
     else
       render :edit
@@ -32,6 +32,7 @@ class AuthorsController < ApplicationController
   end
 
   def verify
+    @author = Author.find(params[:author_id])
     @author.is_verified = true
     @author.date_verified = Date.today.to_s
     @author.save
@@ -45,11 +46,11 @@ class AuthorsController < ApplicationController
 
   private
 
-  def set_article
+  def set_author
     @author = Author.find(params[:id])
   end
 
-  def article_params
+  def author_params
     params.require(:author).permit(:name, :address, :date_verified, :is_verified)
   end
 end
