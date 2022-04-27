@@ -3,7 +3,7 @@ const refreshSuggestions = () => {
 	const activityType = document.querySelector('#activity-type');
 	activityTemplates.innerHTML =
 		'\
-		<div class="spinner-border text-secondary m-5" role="status">\
+		<div class="spinner-border text-primary m-5" role="status">\
 			<span class="visually-hidden">Loading...</span>\
 		</div>';
 	fetch(`activities/${activityType.value}`)
