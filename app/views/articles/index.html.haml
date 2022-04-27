@@ -1,18 +1,12 @@
 - content_for :head do
     = render 'home/header'
-%h1 Hello from index page
-%p Find me in app/views/articles/index.html.erb
-
-%table.table
-    %head
-        %tr
-            %th Title
-            %th Content
-            %th Action
-    %tbody
-        -@articles.each do |article|
-            %tr
-                %td= link_to "#{article.title}", article_path(article)
-                %td=article.content
-                %td=link_to 'Comments', article_comments_path(article)
-                %td=link_to  'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}
+-@articles.each do |article|
+    .article-preview.mb-3.p-3.border.border-info
+        %p.fw-light.mb-0
+            =link_to "#{article.author.name}", author_path(article.author), class: 'article-link text-secondary'
+        %p.fw-light.text-secondary
+            =article.created_at.strftime("%B %e, %Y")
+        %h2.mb-3=link_to "#{article.title}", article_path(article), class: 'text-dark article-link'
+        %p.text-secondary=article.content
+        .border-top.border-info.pt-2
+            =link_to "#{article.comments.count} comments", article_comments_path(article), class: 'article-link  text-secondary'

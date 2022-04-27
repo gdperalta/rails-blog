@@ -1,12 +1,12 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-dark.mb-4
   .container
-    = link_to 'Activity Blog', root_path, class: 'navbar-brand text-secondary'
+    = link_to 'Activity Blog', root_path, class: 'navbar-brand text-light'
     %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNavAltMarkup", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarNavAltMarkup.collapse.navbar-collapse
       .navbar-nav
-        = link_to 'Articles', articles_path, class: 'nav-link text-secondary'
-        = link_to 'Authors', authors_path, class: 'nav-link text-secondary'
-        = link_to 'Create an Article', template_new_articles_path, class: 'nav-link text-secondary'
-        = link_to 'Log in', new_user_session_path, class: 'nav-link text-secondary'
-        = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link text-secondary'
+        = link_to 'Articles', articles_path, class: 'nav-link text-light'
+        = link_to 'Authors', authors_path, class: 'nav-link text-light'
+        = link_to 'Create an Article', template_new_articles_path, class: 'nav-link text-light'
+        = link_to 'Log in', new_user_session_path, class: 'nav-link text-light'
+        = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link text-light'

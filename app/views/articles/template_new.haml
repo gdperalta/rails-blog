@@ -9,6 +9,6 @@
     %select#activity-type{:name => "activity-type"}
       - @categories.each do |category|
         %option{:value => "#{category.name}"}= category.name.capitalize
-    %button#refresh-button.btn.btn-primary
+    %button#refresh-button.btn.btn-primary.text-light
       Get New Suggestions
     #activity-templates.d-flex.justify-content-center

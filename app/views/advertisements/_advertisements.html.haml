@@ -1,3 +1,5 @@
-%p
-  = ads['title']
-  %img{:src => "#{ads['image']}"}/
+.d-flex.flex-column
+  .mb-3.ads-image
+    %img.img-fluid.img-thumbnail{:src => "#{ads['image']}"}
+  %p
+    = ads['title']

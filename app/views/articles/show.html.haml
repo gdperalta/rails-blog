@@ -1,21 +1,26 @@
 - content_for :head do
   = render 'home/header'
-%h1 Hello from show page
-%p
-  Title:
-  %span
-    = @article.title
-%p
-  Content:
-  %span
+.col-9.p-4
+  %p.text-secondary.mb-2
+    #{@article.author.name} - #{@article.created_at.strftime("%B %e, %Y")}
+  %h1.text-dark.mb-4
+    = @article.formatted_title
+  %p.fs-4
     = @article.content
-= form_with model: [@article, @comment] do |form|
-  %div
-    = form.label :body
-    = form.text_field :body
-  %div
-    = form.submit
-= link_to 'Go to articles page', articles_path
+  .border-top.p-2
+    - @article.comments.each do |comment|
+      - unless comment.id.nil?
+        .mb-4.px-2
+          %p.text-secondary
+            = comment.created_at.strftime("%B %e, %Y")
+          %p
+            = comment.body
+    = form_with model: [@article, @comment] do |form|
+      .mb-3
+        = form.label :body, 'Add a comment', class: 'form-label text-secondary'
+        = form.text_area :body, class: 'form-control'
+      .mb-3
+        = form.submit 'Submit', class: 'btn btn-info text-light'
 - content_for :advertisements do
   - if @ads
     = render 'advertisements/advertisements', ads: @ads
