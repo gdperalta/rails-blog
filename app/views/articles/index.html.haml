@@ -12,7 +12,7 @@
     %tbody
         -@articles.each do |article|
             %tr
-                %td=article.title
+                %td= link_to "#{article.title}", article_path(article)
                 %td=article.content
                 %td=link_to 'Comments', article_comments_path(article)
                 %td=link_to  'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}
