@@ -7,4 +7,23 @@
 		<%= @article.title%>
 	</span>
 </p>
+<p>Content:
+	<span>
+		<%= @article.content%>
+	</span>
+</p>
+<%= form_with model: [@article, @comment] do |form|%>
+	<div>
+		<%= form.label :body%>
+		<%= form.text_field :body%>
+	</div>
+	<div>
+		<%= form.submit%>
+	</div>
+<% end %>
 <%= link_to 'Go to articles page', articles_path%>
+<% content_for :advertisements do %>
+	<% if @ads%>
+		<%= render 'advertisements/advertisements', ads: @ads %>
+	<% end %>
+<% end %>
