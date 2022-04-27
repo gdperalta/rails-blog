@@ -1,20 +1,32 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_author, only: %i[new create edit update destroy]
 
   def index
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @comment = @article.comments.build
+
+    i = @article.article_advertisements.count
+    @ads = @article.advertisements[rand(i - 1)].ads if i != 0
+  end
 
   def new
-    @article = Article.new
+    @article = @author.articles.build
+    @article.article_categories.build
+    @article.article_advertisements.build
+    @advertisements = Advertisement.all
+
+    @activity, @category_id = check_params
   end
 
   def edit; end
 
   def create
-    @article = Article.new(article_params)
+    @article = @author.articles.build(filter_params(article_params))
 
     if @article.save
       redirect_to @article, notice: 'a new article is created'
@@ -36,14 +48,20 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
-  def template_new; end
+  def template_new
+    @categories = Category.all
+  end
 
   def activities
-    @activities = []
-    6.times { @activities.push(ActivityGenerator::Client.randomize[:data]) }
+    # fetch 'activities/${type}
+    @activities = Article.activities(params[:type])
   end
 
   private
+
+  def set_author
+    @author = current_user.role_users.find_by('role_id': 1).author
+  end
 
   def set_article
     @article = Article.find(params[:id])
@@ -51,7 +69,28 @@ class ArticlesController < ApplicationController
     redirect_to new_article_path
   end
 
+  def filter_params(params)
+    filtered_params = params
+    params[:article_advertisements_attributes].each do |key, value|
+      filtered_params[:article_advertisements_attributes].delete(key) if value[:advertisement_id] == '0'
+    end
+
+    filtered_params
+  end
+
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :author_id,
+                                    article_categories_attributes: %i[id article_id category_id],
+                                    article_advertisements_attributes: %i[id advertisement_id article_id])
+  end
+
+  def check_params
+    if params['activity'].nil?
+      ['', 1]
+    else
+      activity = params['activity']
+      category_id = Category.find_by('name': activity['type']).id
+      [activity, category_id]
+    end
   end
 end
