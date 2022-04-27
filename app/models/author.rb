@@ -1,5 +1,6 @@
 class Author < ApplicationRecord
-  has_many :article
+  belongs_to :role_user
+  has_many :articles
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true
   # validates :date_verified, presence: true
