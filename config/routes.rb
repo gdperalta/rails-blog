@@ -13,5 +13,10 @@ Rails.application.routes.draw do
     patch 'verify', to: 'authors#verify', as: 'verify'
   end
 
+  scope module: 'api/v1', path: 'activity', as: 'activity' do
+    get '/random', to: 'activity#random_activity', as: 'random'
+    get '/:type', to: 'activity#activity_type', as: 'type'
+  end
+
   root to: 'articles#index'
 end
