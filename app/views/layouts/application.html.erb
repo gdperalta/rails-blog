@@ -12,11 +12,18 @@
 	</head>
 	<body>
 		<%= yield :head %>
-		<div class='container bg-white'>
+		<div class='container-xxl bg-white'>
 			<% if notice%>
 				<%= render 'layouts/alerts' %>
 			<% end %>
-			<%= yield %>
+			<div class='row'>
+				<div class='col-9'>
+					<%= yield %>
+				</div>
+				<div class='col-md-3'>
+					<%= yield :advertisements%>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
