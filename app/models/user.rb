@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :role_users
   has_many :roles, through: :role_users
+  accepts_nested_attributes_for :role_users
 end
