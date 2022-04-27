@@ -2,6 +2,7 @@ class Article < ApplicationRecord
   scope :long_title, ->(min_length) { where('LENGTH(title) > ?', min_length) }
   scope :has_a_new_comment, -> { joins(:comments).where("comments.created_at > '2020-03-18'") }
 
+  belongs_to :author
   has_many :comments
   has_many :article_advertisements
   has_many :advertisements, through: :article_advertisements
@@ -27,9 +28,7 @@ class Article < ApplicationRecord
     activities
   end
 
-  private
-
   def formatted_title
-    title.upcase
+    title.capitalize
   end
 end
