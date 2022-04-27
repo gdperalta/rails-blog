@@ -1,0 +1,15 @@
+.btn-outline-info,
+.btn-outline-primary {
+	&:hover {
+		color: white !important;
+	}
+}
+
+.template-btn {
+	height: 150px;
+	transition: color 0.25s ease-in, background-color 0.25s ease-in;
+	&:hover {
+		color: white !important;
+		background-color: $primary;
+	}
+}
