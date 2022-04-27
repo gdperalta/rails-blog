@@ -1,11 +1,12 @@
 const refreshSuggestions = () => {
 	const activityTemplates = document.querySelector('#activity-templates');
+	const activityType = document.querySelector('#activity-type');
 	activityTemplates.innerHTML =
 		'\
 		<div class="spinner-border text-secondary m-5" role="status">\
 			<span class="visually-hidden">Loading...</span>\
 		</div>';
-	fetch('activities')
+	fetch(`activities/${activityType.value}`)
 		.then((data) => data.text())
 		.then((html) => {
 			activityTemplates.innerHTML = html;
