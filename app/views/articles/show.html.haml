@@ -1,0 +1,21 @@
+- content_for :head do
+  = render 'home/header'
+%h1 Hello from show page
+%p
+  Title:
+  %span
+    = @article.title
+%p
+  Content:
+  %span
+    = @article.content
+= form_with model: [@article, @comment] do |form|
+  %div
+    = form.label :body
+    = form.text_field :body
+  %div
+    = form.submit
+= link_to 'Go to articles page', articles_path
+- content_for :advertisements do
+  - if @ads
+    = render 'advertisements/advertisements', ads: @ads

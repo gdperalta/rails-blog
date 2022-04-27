@@ -1,0 +1,27 @@
+- content_for :head do
+  = render 'home/header'
+%h1 Hello from show page
+%table.table-show
+  %tr
+    %td
+      Title:
+    %td{:colspan => "2"}
+      = @author.name
+  %tr
+    %td
+      Address:
+    %td{:colspan => "2"}
+      = @author.address
+  %tr
+    %td
+      Verified:
+    - if @author.is_verified
+      %td
+        = @author.date_verified
+    - else
+      %td Not Verified
+      - if false
+        %td
+          = link_to 'Verify Author', verify_author_path(@author), method: :patch, data: {confirm: "Verify author #{@author.name}?"}, class: 'verify-btn'
+  %tr
+= link_to 'Go to authors page', authors_path

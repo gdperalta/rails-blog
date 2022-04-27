@@ -1,0 +1,14 @@
+- content_for :head do
+  = render 'home/header'
+%h4 Templates
+%ol
+  %li
+    Blank Article
+    \#{link_to 'Blank Article', new_article_path}
+  %li
+    %select#activity-type{:name => "activity-type"}
+      - @categories.each do |category|
+        %option{:value => "#{category.name}"}= category.name.capitalize
+    %button#refresh-button.btn.btn-primary
+      Get New Suggestions
+    #activity-templates.d-flex.justify-content-center

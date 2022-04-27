@@ -1,0 +1,8 @@
+- content_for :head do
+  = render 'home/header'
+= form_with model: [@article, @comment] do |form|
+  %div
+    = form.label :body
+    = form.text_field :body
+  %div
+    = form.submit

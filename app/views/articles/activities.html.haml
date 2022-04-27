@@ -1,0 +1,4 @@
+- @activities.each do |activity|
+  %p
+    = activity['activity']
+  = link_to 'Create', new_article_path(activity: activity)

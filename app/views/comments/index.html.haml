@@ -1,0 +1,15 @@
+- content_for :head do
+  = render 'home/header'
+= @article.title
+%h2 Comments
+%table
+  %thead
+    %tr
+      Comment Body
+    %tr
+      Action
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        %td
+          = comment.body

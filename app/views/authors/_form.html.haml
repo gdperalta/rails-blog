@@ -1,0 +1,13 @@
+- if author.errors.any?
+  - author.errors.each do |error|
+    %p
+      = error.full_message
+= form_with model: author do |form|
+  .form-field
+    = form.label :name
+    = form.text_field :name
+  .form-field
+    = form.label :address
+    = form.text_field :address
+  %button.action
+    = form.submit class: 'submit-btn'
