@@ -1,4 +1,5 @@
 - @activities.each do |activity|
-  %p
-    = activity['activity']
-  = link_to 'Create', new_article_path(activity: activity)
+  .col-sm-4
+    =link_to new_article_path(activity: activity), class: 'text-decoration-none' do
+      .border.rounded.border-primary.text-dark.template-btn.p-4.mb-3.fs-4
+        #{activity['activity']}

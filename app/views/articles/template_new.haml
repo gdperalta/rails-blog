@@ -1,14 +1,18 @@
 - content_for :head do
   = render 'home/header'
-%h4 Templates
-%ol
-  %li
-    Blank Article
-    \#{link_to 'Blank Article', new_article_path}
-  %li
-    %select#activity-type{:name => "activity-type"}
-      - @categories.each do |category|
-        %option{:value => "#{category.name}"}= category.name.capitalize
-    %button#refresh-button.btn.btn-primary.text-light
-      Get New Suggestions
-    #activity-templates.d-flex.justify-content-center
+%h4.mb-4.text-dark
+  Create A New Article
+%ol.mb-3
+  %li.fs-3.mb-5
+    #{link_to 'Blank Article', new_article_path, class: 'fs-3 btn btn-outline-primary'}
+  %li.fs-3
+    .row.mb-3
+      .col-sm-2
+        %select.form-select.fs-3.text-dark#activity-type{:name => "activity-type"}
+          - @categories.each do |category|
+            %option{:value => "#{category.name}"}= category.name.capitalize
+      .col-sm-3
+        %button#refresh-button.btn.btn-outline-info.text-info.fs-3
+          Generate Suggestions
+.row
+  #activity-templates.d-flex.justify-content-center

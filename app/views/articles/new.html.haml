@@ -1,6 +1,7 @@
 - content_for :head do
   = render 'home/header'
-%h1 Articles#new
+%h4.mb-4.text-dark.fw-bold
+  New Article
 = render 'form', article: @article, |
   activity: @activity,              |
   category_id: @category_id,        |
