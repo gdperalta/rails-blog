@@ -5,10 +5,27 @@
 		</p>
 	<% end %>
 <% end %>
-<%= form_with model: article do |form| %>
+<%= form_with model: article, class: '' do |form| %>
 	<%= form.label :title %>
-	<%= form.text_field :title %>
+	<%= form.text_field :title, value: activity['activity'] %>
 	<%= form.label :content %>
-	<%= form.text_field :content %>
+	<%= form.text_area :content %>
+	<fieldset>
+		<%= form.fields_for :article_categories do |f| %>
+			<div class="field">
+				<%= f.collection_select :category_id, Category.all, :id, :name, prompt: 'Select Category', selected: category_id %>
+			</div>
+		<% end %>
+	</fieldset>
+	<fieldset>
+		<% advertisements.each_with_index do |ads, index| %>
+			<%= form.fields_for :article_advertisements do |f| %>
+				<div class="field">
+					<%= f.check_box :advertisement_id, {}, ads.id, 0 %>
+					<%= f.label :advertisement_id, ads.name, class: '' %>
+				</div>
+			<% end %>
+		<% end %>
+	</fieldset>
 	<%= form.submit %>
 <% end %>
