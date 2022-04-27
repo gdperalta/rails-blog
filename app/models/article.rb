@@ -5,30 +5,29 @@ class Article < ApplicationRecord
   has_many :comments
   has_many :article_advertisements
   has_many :advertisements, through: :article_advertisements
+  has_many :article_categories
+  has_many :categories, through: :article_categories
+  accepts_nested_attributes_for :article_advertisements
+  accepts_nested_attributes_for :article_categories
   validates :content, presence: true
   validates :title, presence: true, uniqueness: true
 
-  before_create :set_author_name, :set_comment
+  def self.activities(type)
+    activities = []
+    i = 0
+    until i == 6
+      activity = ActivityGenerator::Client.type(type)[:data]
+
+      next if activities.any? { |data| data['key'] == activity['key'] }
+
+      activities.push(activity)
+      i += 1
+    end
+
+    activities
+  end
 
   private
-
-  # validate :check_length
-
-  # def check_length
-  #   errors.add(:content, 'too long') if !content.nil? && content.length > 5
-  # end
-
-  def set_author_name
-    return unless author.blank?
-
-    self.author = 'Default Author'
-  end
-
-  def set_comment
-    return unless comments.empty? && comments.try(:body).blank?
-
-    comments.build(body: 'Default comment')
-  end
 
   def formatted_title
     title.upcase
