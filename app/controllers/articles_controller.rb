@@ -55,6 +55,8 @@ class ArticlesController < ApplicationController
   end
 
   def activities
+    # params['type'] from ajax
+    # select input value has type
     # fetch 'activities/${type}
     @activities = Article.activities(params[:type])
   end
@@ -94,10 +96,10 @@ class ArticlesController < ApplicationController
 
   def check_params
     if params['activity'].nil?
-      ['', 1]
+      ['', '']
     else
       activity = params['activity']
-      category_id = Category.find_by('name': activity['type']).id
+      category_id = Category.find_by('name': params['type']).id
       [activity, category_id]
     end
   end
