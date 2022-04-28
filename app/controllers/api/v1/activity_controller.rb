@@ -2,11 +2,13 @@ module Api
   module V1
     class ActivityController < ActionController::Base
       def random_activity
-        render json: ActivityGenerator::Client.randomize
+        response = ActivityGenerator::Client.randomize
+        render json: response.response
       end
 
       def activity_type
-        render json: ActivityGenerator::Client.type(params[:type])
+        response = ActivityGenerator::Client.type(params[:type])
+        render json: response.response
       end
     end
   end
