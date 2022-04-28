@@ -1,14 +1,9 @@
 module Product
   class Error
-    def self.map(code)
-      case code
-      when 404
-        'Unauthorized request! Please try again'
-      when 401
-        'Please try again'
-      else
-        'Invalid Request'
-      end
+    class InvalidRequest < StandardError
+    end
+
+    class InvalidProduct < StandardError
     end
   end
 end

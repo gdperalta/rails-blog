@@ -1,5 +1,8 @@
 module ActivityGenerator
   class Error
+    class InvalidEndpoint < StandardError
+    end
+
     def self.map(code)
       case code
       when 404
