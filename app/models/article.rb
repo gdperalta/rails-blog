@@ -17,9 +17,9 @@ class Article < ApplicationRecord
     activities = []
     i = 0
     until i == 6
-      activity = ActivityGenerator::Client.type(type)[:data]
+      activity = ActivityGenerator::Client.type(type)
 
-      next if activities.any? { |data| data['key'] == activity['key'] }
+      next if activities.any? { |data| data.key == activity.key }
 
       activities.push(activity)
       i += 1
