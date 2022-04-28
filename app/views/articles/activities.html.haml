@@ -1,5 +1,5 @@
 - @activities.each do |activity|
   .col-sm-4
-    =link_to new_article_path(activity: activity), class: 'text-decoration-none' do
+    =link_to new_article_path(activity: activity.activity, type: activity.type), class: 'text-decoration-none' do
       .border.rounded.border-primary.text-dark.template-btn.p-4.mb-3.fs-4
-        #{activity['activity']}
+        #{activity.activity}
