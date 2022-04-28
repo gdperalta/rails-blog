@@ -28,20 +28,23 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# For user authentication
 gem 'devise', '~> 4.8.1'
-gem 'haml'
+gem 'haml', '~> 5.2.2'
 
-gem 'rest-client'
+gem 'httparty', '~> 0.20.0'
+gem 'rest-client', '~> 2.1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 6.2.0'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 5.1.1'
 end
 # gem 'net-smtp'
 
 group :development do
-  gem "erb2haml"
+  gem "erb2haml", '~> 0.1.5'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
