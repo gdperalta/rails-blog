@@ -1,18 +1,27 @@
-require 'rest-client'
+require 'httparty'
 
 module Product
   class Request
-    BASE_URL = 'https://fakestoreapi.com/products'
+    include HTTParty
+    base_uri 'https://fakestoreapi.com/products'
 
-    def self.call(http_method:, endpoint:)
-      result = RestClient::Request.execute(
-        method: http_method,
-        url: "#{BASE_URL}#{endpoint}",
+    def self.call(endpoint:)
+      response = get(
+        endpoint,
         headers: { 'Content-Type' => 'application/json' }
       )
-      { code: result.code, status: 'Success', data: JSON.parse(result) }
-    rescue RestClient::ExceptionWithResponse => e
-      { code: e.http_code, status: e.message, data: Error.map(e.http_code) }
+      handle_errors(response, endpoint)
+
+      { code: response.code, status: 'Success', data: response }
+    rescue Error::InvalidRequest => e
+      { code: 404, status: 'Invalid Request', data: e.message }
+    rescue Error::InvalidProduct => e
+      { code: 404, status: 'Invalid Product', data: e.message }
+    end
+
+    def self.handle_errors(response, endpoint)
+      raise Error::InvalidRequest, "Cannot GET endpoint: '#{endpoint}'" unless response.success?
+      raise Error::InvalidProduct, 'Product does not exist' if response.body == 'null'
     end
   end
 end
