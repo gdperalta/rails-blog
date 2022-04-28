@@ -13,6 +13,6 @@ class Advertisement < ApplicationRecord
     when "women's clothing"
       i = rand(15..20)
     end
-    Product::Client.product(i)[:data]
+    Product::Client.product(i)
   end
 end
