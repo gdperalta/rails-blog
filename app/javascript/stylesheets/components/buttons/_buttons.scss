@@ -10,6 +10,6 @@
 	transition: color 0.25s ease-in, background-color 0.25s ease-in;
 	&:hover {
 		color: white !important;
-		background-color: $primary;
+		background-color: $primary !important;
 	}
 }
