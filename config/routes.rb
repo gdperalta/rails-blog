@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'articles/template_new', to: 'articles#template_new', as: 'template_new_articles'
   get 'articles/activities/:type', to: 'articles#activities', as: 'article_activities'
+  get 'articles/owned', to: 'articles#owned', as: 'articles_owned'
   resources :articles do
     resources :comments
   end
