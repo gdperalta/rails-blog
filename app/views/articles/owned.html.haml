@@ -1,0 +1,11 @@
+- content_for :head do
+    = render 'home/header'
+-@articles.each do |article|
+    .article-preview.mb-3.p-3.border.rounded
+        %h2.mb-3=link_to "#{article.title}", article_path(article), class: 'text-dark article-link'
+        %p.text-secondary=article.content
+        .border-top.border-info.pt-2
+            =link_to "#{article.comments.count} comments", article_comments_path(article), class: 'article-link  text-secondary'
+        .btn-group{"aria-label" => "Basic mixed styles example", :role => "group"}
+            =link_to 'Edit', edit_article_path(article), class: 'btn btn-dark text-light'
+            =link_to 'Delete', article, method: :delete, data: {confirm: "Remove article?"}, class: 'btn btn-primary text-light'
