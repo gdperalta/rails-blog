@@ -10,13 +10,17 @@
           = link_to 'My Articles', articles_owned_path, class: 'nav-link text-light'
         = link_to 'Authors', authors_path, class: 'nav-link text-light'
       .navbar-nav.ms-auto
-        = link_to 'Create Article', template_new_articles_path, class: 'nav-link btn btn-info text-white fs-5 me-2'
-        %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.text-light.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-            Account
-          %ul.dropdown-menu.bg-dark.fs-5{"aria-labelledby" => "navbarDropdown"}
-            %li
-              = link_to 'Log in', new_user_session_path, class: 'nav-link text-light'
-            %li
-              = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link text-light'
+        - if user_signed_in?
+          = link_to 'Create Article', template_new_articles_path, class: 'nav-link btn btn-info text-white fs-5 me-2'
+          %li.nav-item.dropdown
+            %a#navbarDropdown.nav-link.text-light.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+              Account
+            %ul.dropdown-menu.bg-dark.fs-5{"aria-labelledby" => "navbarDropdown"}
+              %li
+                = link_to 'Details', author_path(current_user.role_users.first.author), class: 'nav-link text-light'
+              %li
+                = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link text-light'
+        - else       
+          = link_to 'Log in', new_user_session_path, class: 'nav-link text-light'
+
 
