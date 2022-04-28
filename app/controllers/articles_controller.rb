@@ -1,10 +1,15 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_article, only: %i[show edit update destroy]
-  before_action :set_author, only: %i[new create edit update destroy]
+  before_action :set_author, only: %i[new create edit update destroy owned]
+  before_action :set_associations, only: %i[new create edit update destroy]
 
   def index
     @articles = Article.all
+  end
+
+  def owned
+    @articles = @author.articles
   end
 
   def show
@@ -18,15 +23,12 @@ class ArticlesController < ApplicationController
     @article = @author.articles.build
     @article.article_categories.build
     @article.article_advertisements.build
-    @advertisements = Advertisement.all
-
-    @activity, @category_id = check_params
   end
 
   def edit; end
 
   def create
-    @article = @author.articles.build(filter_params(article_params))
+    @article = @author.articles.build(filter_params)
 
     if @article.save
       redirect_to @article, notice: 'a new article is created'
@@ -36,7 +38,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
+    if @article.update(filter_params)
       redirect_to @article
     else
       render :edit
@@ -69,9 +71,9 @@ class ArticlesController < ApplicationController
     redirect_to new_article_path
   end
 
-  def filter_params(params)
-    filtered_params = params
-    params[:article_advertisements_attributes].each do |key, value|
+  def filter_params
+    filtered_params = article_params
+    article_params[:article_advertisements_attributes].each do |key, value|
       filtered_params[:article_advertisements_attributes].delete(key) if value[:advertisement_id] == '0'
     end
 
@@ -82,6 +84,12 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :content, :author_id,
                                     article_categories_attributes: %i[id article_id category_id],
                                     article_advertisements_attributes: %i[id advertisement_id article_id])
+  end
+
+  def set_associations
+    @advertisements = Advertisement.all
+
+    @activity, @category_id = check_params
   end
 
   def check_params
