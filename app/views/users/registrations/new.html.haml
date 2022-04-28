@@ -1,3 +1,5 @@
+- content_for :head do
+  = render 'home/header'
 %h2 Sign up
 = form_with model: resource, as: resource_name, url: registration_path(resource_name) do |f|
   = render "devise/shared/error_messages", resource: resource
