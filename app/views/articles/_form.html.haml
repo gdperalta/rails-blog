@@ -3,9 +3,12 @@
     %p
       = error.full_message
 = form_with model: article do |form|
-  .mb-5
+  .mb-4
     = form.label :title, class: 'form-label fs-4 text-dark'
-    = form.text_field :title, class: 'form-control form-control-lg', value: activity['activity']
+    - if article.title.nil?
+      = form.text_field :title, class: 'form-control form-control-lg', value: (activity['activity'])
+    - else 
+      = form.text_field :title, class: 'form-control form-control-lg'
   .mb-5
     = form.label :content, class: 'form-label fs-4 text-dark'
     = form.text_area :content, class: 'form-control form-control-lg article-content'
@@ -18,7 +21,7 @@
   %p.text-dark.fs-5
     Please check what type of ads you would like to display on your article (Leave empty if you don't want show any ads).
   %fieldset.row.mb-4.ms-5
-    - advertisements.each_with_index do |ads, index|
+    - advertisements.each do |ads|
       = form.fields_for :article_advertisements do |f|
         .field.form-check
           = f.check_box :advertisement_id, {class: 'form-check-input fs-4 text-dark'}, ads.id, 0

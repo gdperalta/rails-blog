@@ -1,7 +1,7 @@
 - content_for :head do
     = render 'home/header'
 -@articles.each do |article|
-    .article-preview.mb-3.p-3.border.border-info
+    .article-preview.mb-3.p-3.border.rounded
         %p.fw-light.mb-0
             =link_to "#{article.author.name}", author_path(article.author), class: 'article-link text-secondary'
         %p.fw-light.text-secondary
