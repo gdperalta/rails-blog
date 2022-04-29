@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   def edit; end
 
   def create
-    @article = @author.articles.build(filter_params)
+    @article = @author.articles.build(article_params)
 
     if @article.save
       redirect_to @article, notice: 'a new article is created'
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(filter_params)
+    if @article.update(article_params)
       redirect_to @article
     else
       render :edit
@@ -73,19 +73,10 @@ class ArticlesController < ApplicationController
     redirect_to new_article_path
   end
 
-  def filter_params
-    filtered_params = article_params
-    article_params[:article_advertisements_attributes].each do |key, value|
-      filtered_params[:article_advertisements_attributes].delete(key) if value[:advertisement_id] == '0'
-    end
-
-    filtered_params
-  end
-
   def article_params
     params.require(:article).permit(:title, :content, :author_id,
                                     article_categories_attributes: %i[id article_id category_id],
-                                    article_advertisements_attributes: %i[id advertisement_id article_id])
+                                    article_advertisements_attributes: %i[id advertisement_id article_id _destroy])
   end
 
   def set_associations
