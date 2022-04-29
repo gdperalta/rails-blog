@@ -1,5 +1,7 @@
-.nested-fields.mb-5
+.nested-fields.mb-5.col-auto
   = f.hidden_field :_destroy, class: 'destroy-fields'
-  = f.label :advertisement_id, ads.name.capitalize, class: 'form-label fs-4 text-dark'
-  = f.text_field :advertisement_id, class: 'ads-value form-control form-control-lg', value: ads.id
-  = link_to "Remove", '#', class: "remove-fields btn btn-outline-secondary"
+  = f.hidden_field :advertisement_id, class: 'ads-value form-control form-control-lg', value: ads.id
+
+  = f.label :advertisement_id, ads.name.capitalize, class: 'form-label fs-4 text-info align-middle'
+  = link_to '#', class: "remove-fields" do 
+    %i.bi.bi-x.fs-4.ms-3.text-secondary.align-middle.remove-fields
