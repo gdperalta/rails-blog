@@ -21,10 +21,10 @@
   %p.text-dark.fs-5
     Please check what type of ads you would like to display on your article (Leave empty if you don't want show any ads).
   %fieldset.mb-4.ms-5
-    .row
+    .row.mb-4
       - advertisements.each do |ads|
         = link_to_add_fields ads, form, :article_advertisements
-    .ads-container
+    .ads-container.row
       = form.fields_for :article_advertisements do |article_advertisement|
         - if !article_advertisement.object.advertisement_id.blank?
           = render "article_advertisement_fields", f: article_advertisement, ads: article_advertisement.object.advertisement
