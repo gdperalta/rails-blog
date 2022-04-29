@@ -1,8 +1,9 @@
 - content_for :head do
-  = render 'home/header'
-%h4.mb-4.text-dark.fw-bold
-  New Article
-= render 'form', article: @article, |
-  activity: @activity,              |
-  category_id: @category_id,        |
-  advertisements: @advertisements   |
+  = render 'home/back_header'
+.position-relative
+  %h4.mb-4.text-dark.fw-bold
+    New Article
+  = render 'form', article: @article, |
+    activity: @activity,              |
+    category_id: @category_id,        |
+    advertisements: @advertisements   |
