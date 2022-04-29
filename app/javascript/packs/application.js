@@ -14,6 +14,7 @@ ActiveStorage.start();
 
 import * as bootstrap from 'bootstrap';
 import '../stylesheets/application';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 document.addEventListener('turbolinks:load', () => {
 	const popoverTriggerList = [].slice.call(
