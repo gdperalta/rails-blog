@@ -117,7 +117,7 @@ The requests used are listed as follows:
 
 `ActivityGenerator::Client`
 
-Blog App Route: Get '/activity/random'
+Blog App Route: Get `/activity/random`
 
 ```ruby
 
@@ -127,7 +127,7 @@ def self.randomize
 end
 ```
 
-Blog App Route: Get '/activity/:type'
+Blog App Route: Get `/activity/:type`
 
 ```ruby
 
@@ -201,7 +201,7 @@ class Request
 The requests used are listed as follows:
 `Product::Client`
 
-Blog App Route: Get '/products/:id'
+Blog App Route: Get `/products/:id`
 
 ```ruby
 
