@@ -117,7 +117,7 @@ The requests used are listed as follows:
 
 `ActivityGenerator::Client`
 
-Blog App Route '/activity/random'
+Blog App Route: Get '/activity/random'
 
 ```ruby
 
@@ -127,7 +127,7 @@ def self.randomize
 end
 ```
 
-Blog App Route '/activity/:type'
+Blog App Route: Get '/activity/:type'
 
 ```ruby
 
@@ -136,6 +136,22 @@ def self.type(type)
     new(response)
 end
 
+```
+
+Expected Response for the two requests
+
+```ruby
+{
+  "code" : 200,
+  "status" : "Success",
+  "data" : {
+    "activity" : string,
+    "type" : string,
+    "participants" : integer,
+    "price" : float,
+    "link" : link
+    }
+}
 ```
 
 The following types can be entered for the request:
@@ -185,7 +201,7 @@ class Request
 The requests used are listed as follows:
 `Product::Client`
 
-Blog App Route '/products/:id'
+Blog App Route: Get '/products/:id'
 
 ```ruby
 
@@ -194,6 +210,27 @@ def self.randomize
     new(response)
 end
 
+```
+
+Response
+
+```ruby
+{
+  "code" : 200,
+  "status":"Success",
+  "data" : {
+    "id" : 1,
+    "title" : string,
+    "price": float,
+    "description": string,
+    "category": string,
+    "image": link,
+    "rating" : {
+      "rate" : float,
+      "count" : integer
+      }
+    }
+}
 ```
 
 The api had **20** products that could be request at the time this project was made
