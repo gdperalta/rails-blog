@@ -247,8 +247,7 @@ The api had **20** products that could be request at the time this project was m
 
 - [x] Add Routes for api wrapper requests
 - [x] Integrate used api with app
-- [ ] Improve layout and input fields for advertisements in article creation form
-- [ ] Improve advertisement display in show article view
+- [ ] Add sidebar for related articles
 - [ ] Add tests
 - [ ] Deployment
 
