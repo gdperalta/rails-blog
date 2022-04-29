@@ -12,6 +12,7 @@
 	</head>
 	<body>
 		<%= yield :head %>
+		<%= yield :side%>
 		<div class='container-xxl'>
 			<% if notice%>
 				<%= render 'layouts/alerts' %>
