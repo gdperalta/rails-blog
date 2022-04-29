@@ -27,5 +27,3 @@
           = link_to 'Delete', author, method: :delete, data: {confirm: "Remove author #{author.name}?"}, class: 'link'
         %td
           = link_to 'Edit', edit_author_path(author), class: 'link'
-%button.btn
-  = link_to 'Create New Author', new_author_path, class: 'link'
