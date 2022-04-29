@@ -30,3 +30,6 @@ document.addEventListener('turbolinks:load', () => {
 		return new bootstrap.Tooltip(tooltipTriggerEl);
 	});
 });
+
+require('./nested_forms/addFields');
+require('./nested_forms/removeFields');
