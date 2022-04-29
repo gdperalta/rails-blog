@@ -1,5 +1,6 @@
 .d-flex.flex-column.p-3
-  .mb-3.ads-image
-    %img.img-fluid.img-thumbnail{:src => "#{ads.image}"}
-  %p
-    = ads.title
+  .card.mb-3
+    %img.card-img-top.img-fluid.img-thumbnail{:src => "#{ads.image}"}
+    .card-body
+      %p.card-text.text-secondary
+        = ads.title
