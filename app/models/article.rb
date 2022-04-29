@@ -1,6 +1,9 @@
 class Article < ApplicationRecord
   scope :long_title, ->(min_length) { where('LENGTH(title) > ?', min_length) }
   scope :has_a_new_comment, -> { joins(:comments).where("comments.created_at > '2020-03-18'") }
+  scope :find_categories, lambda { |category_id|
+                            joins(:article_categories).where('article_categories.category_id = ?', category_id)
+                          }
 
   belongs_to :author
   has_many :comments, dependent: :destroy
