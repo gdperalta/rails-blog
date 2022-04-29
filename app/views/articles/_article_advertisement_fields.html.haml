@@ -1,0 +1,5 @@
+.nested-fields.mb-5
+  = f.hidden_field :_destroy, class: 'destroy-fields'
+  = f.label :advertisement_id, ads.name.capitalize, class: 'form-label fs-4 text-dark'
+  = f.text_field :advertisement_id, class: 'ads-value form-control form-control-lg', value: ads.id
+  = link_to "Remove", '#', class: "remove-fields btn btn-outline-secondary"
