@@ -1,6 +1,8 @@
-# README
-
 # **Activities Blog**
+
+## **Built with**
+
+![Ruby 3.0.3](https://img.shields.io/badge/Ruby-%3E%3D3.0.3-red) ![Rails 6.1.4.6](https://img.shields.io/badge/Rails-6.1.4.6-red) ![Yarn 1.22.10](https://img.shields.io/badge/Yarn-1.22.10-%232188b6%3B) ![PostgrSQL 12.9](https://img.shields.io/badge/PostgreSQL-12.9-%23336791) ![Bootstrap 5.1.3](https://img.shields.io/badge/Bootstrap-5.1.3-%236610f2)
 
 The Activitites Blog allows a user to create their own article as an author.
 
@@ -10,15 +12,6 @@ The blog has the following features:
 - Comment on any article
 - Get random suggestions on article topics
 - Have an option to display advertisements(not real) on their article
-
-## **Built with**
-
-- Ruby 3.0.3
-- Rails 6.1.4.6
-- PostgreSQL 1.1
-- Bootstrap 5.1.3
-- Webpacker 5.0
-- Yarn 1.22.10
 
 ## **System dependencies**
 
@@ -32,7 +25,7 @@ The blog has the following features:
 
 ### **Prerequisites**
 
-The setups steps expect the [System dependencies](#system-dependencies) to be installed on the system
+The setups steps expect the Builds listed above to be installed on the system
 
 1. Clone the repository
 
@@ -56,9 +49,9 @@ rails db:create db:migrate db:seed:all
 
 ### **Executing the program**
 
-Enter `rails server' in the cli
+Enter `rails server' in the cli to start the application
 
-## **Usage**
+## **Usages**
 
 ### **Create an Article**
 
@@ -75,7 +68,8 @@ Generate randomly suggested topics per category type with the help of the api wr
 ### **Display advertisements chosen in creation of article**
 
 **_Work in progress_**
-Choose a type of advertisement you would like to display in your article page
+
+Choose a type of advertisement you would like to display in your article page. The advertisements are displayed with the help of the api wrapper [Product](#product)
 ![select_ads][select_ads_pic]
 ![display_ads][display_ads_pic]
 
@@ -97,20 +91,43 @@ The following APIs were used for the project
 
 `rest-client` was used to fetch the api for this wrapper
 
-The request to the api are listed as follows:
+`ActivityGenerator::Request`
 
+```ruby
+  class Request
+    BASE_URL = 'https://www.boredapi.com/api/activity'
+
+    def self.call(http_method:, endpoint:)
+      result = RestClient::Request.execute(
+        method: http_method,
+        url: "#{BASE_URL}#{endpoint}",
+        headers: { 'Content-Type' => 'application/json' }
+      )
+      handle_errors(result)
+
+      { code: result.code, status: 'Success', data: JSON.parse(result) }
+    rescue RestClient::ExceptionWithResponse => e
+      { code: e.http_code, status: e.message, data: Error.map(e.http_code) }
+    rescue Error::InvalidEndpoint => e
+      { code: 404, status: 'Invalid Request', data: JSON.parse(e.message)['error'] }
+    end
 ```
-API: https://www.boredapi.com/api/activity/
-App Route '/activity/random'
+
+The requests used are listed as follows:
+
+`ActivityGenerator::Client`
+
+```ruby
 
 def self.randomize
     response = Request.call(http_method: 'get', endpoint: '/')
     new(response)
 end
+```
 
+Blog App Route '/activity/random'
 
-API: https://www.boredapi.com/api/activity?type={type}
-App Route '/activity/:type'
+```ruby
 
 def self.type(type)
     response = Request.call(http_method: 'get', endpoint: "?type=#{type}")
@@ -118,6 +135,8 @@ def self.type(type)
 end
 
 ```
+
+Blog App Route '/activity/:type'
 
 The following types can be entered for the request:
 
@@ -135,11 +154,38 @@ The following types can be entered for the request:
 
 `httparty` was used to fetch the api for this wrapper
 
-The request to the api are listed as follows:
+`Product::Request`
 
+```ruby
+class Request
+    include HTTParty
+    base_uri 'https://fakestoreapi.com/products'
+
+    def self.call(endpoint:)
+      response = get(
+        endpoint,
+        headers: { 'Content-Type' => 'application/json' }
+      )
+      handle_errors(response, endpoint)
+
+      { code: response.code, status: 'Success', data: response }
+    rescue Error::InvalidRequest => e
+      { code: 404, status: 'Invalid Request', data: e.message }
+    rescue Error::InvalidProduct => e
+      { code: 404, status: 'Invalid Product', data: e.message }
+    end
+
+    def self.handle_errors(response, endpoint)
+      raise Error::InvalidRequest, "Cannot GET endpoint: '#{endpoint}'" unless response.success?
+      raise Error::InvalidProduct, 'Product does not exist' if response.body == 'null'
+    end
+  end
 ```
-API: https://fakestoreapi.com/products/:id
-App Route '/products/:id'
+
+The requests used are listed as follows:
+`Product::Client`
+
+```ruby
 
 def self.randomize
     response = Request.call(http_method: 'get', endpoint: '/')
@@ -147,6 +193,8 @@ def self.randomize
 end
 
 ```
+
+Blog App Route '/products/:id'
 
 The api had **20** products that could be request at the time this project was made
 
