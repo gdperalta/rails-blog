@@ -1,6 +1,6 @@
 # README
 
-# Activities Blog
+# **Activities Blog**
 
 The Activitites Blog allows a user to create their own article as an author.
 
@@ -11,7 +11,7 @@ The blog has the following features:
 - Get random suggestions on article topics
 - Have an option to display advertisements(not real) on their article
 
-## Built with
+## **Built with**
 
 - Ruby 3.0.3
 - Rails 6.1.4.6
@@ -20,7 +20,7 @@ The blog has the following features:
 - Webpacker 5.0
 - Yarn 1.22.10
 
-## System dependencies
+## **System dependencies**
 
 - HTTParty 0.20.0
 - REST Client 2.1.0
@@ -28,9 +28,9 @@ The blog has the following features:
 - Devise 4.8.1
 - Haml 5.2.2
 
-## Getting Started
+## **Getting Started**
 
-### Prerequisites
+### **Prerequisites**
 
 The setups steps expect the [System dependencies](#system-dependencies) to be installed on the system
 
@@ -54,18 +54,46 @@ yarn install
 rails db:create db:migrate db:seed:all
 ```
 
-### Executing the program
+### **Executing the program**
 
 Enter `rails server' in the cli
 
-### APIs used
+## **Usage**
+
+### **Create an Article**
+
+Create an article as an author
+![create_article][create_article_pic]
+![show_article][show_article_pic]
+
+### **Generate Randomly Suggested Topics**
+
+Generate randomly suggested topics per category type with the help of the api wrapper [Activity Generator](#activity-generator)
+
+![activity_generator][activity_generator_pic]
+
+### **Display advertisements chosen in creation of article**
+
+**_Work in progress_**
+Choose a type of advertisement you would like to display in your article page
+![select_ads][select_ads_pic]
+![display_ads][display_ads_pic]
+
+### **Show comments and Add a comment to an article**
+
+- Show comments of the article
+- Add a comment to an article
+
+![comments][comments_pic]
+
+## **APIs used**
 
 The following APIs were used for the project
 
 - Activity Generator - [Bored API](https://www.boredapi.com)
 - Product - [Fake Store Api](https://fakestoreapi.com)
 
-#### Activity Generator
+### **Activity Generator**
 
 `rest-client` was used to fetch the api for this wrapper
 
@@ -103,7 +131,7 @@ The following types can be entered for the request:
 - relaxation
 - social
 
-#### Product
+### **Product**
 
 `httparty` was used to fetch the api for this wrapper
 
@@ -120,12 +148,28 @@ end
 
 ```
 
-The api had 20 products that could be request at the time this project was made
+The api had **20** products that could be request at the time this project was made
 
-### Deployment
+## **Deployment**
 
-### Tests
+**_Work in progress_**
 
-### Roadmap
+## **Tests**
+
+**_Work in progress_**
+
+## Roadmap
 
 - [x] Add Routes for api wrapper requests
+- [x] Integrate used api with app
+- [ ] Improve layout and input fields for advertisements in article creation form
+- [ ] Improve advertisement display in show article view
+- [ ] Add tests
+- [ ] Deployment
+
+[activity_generator_pic]: docs/img/activity_generator.png
+[select_ads_pic]: docs/img/select_ads.png
+[display_ads_pic]: docs/img/display_ads.png
+[comments_pic]: docs/img/comments.png
+[create_article_pic]: docs/img/create_article.png
+[show_article_pic]: docs/img/show_article.png
