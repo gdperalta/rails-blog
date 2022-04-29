@@ -8,6 +8,7 @@
   %p.fs-4
     = @article.content
   .border-top.p-2
+    %p.text-secondary Comments
     - @article.comments.each do |comment|
       - unless comment.id.nil?
         .mb-4.px-2
