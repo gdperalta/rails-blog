@@ -117,6 +117,8 @@ The requests used are listed as follows:
 
 `ActivityGenerator::Client`
 
+Blog App Route '/activity/random'
+
 ```ruby
 
 def self.randomize
@@ -125,7 +127,7 @@ def self.randomize
 end
 ```
 
-Blog App Route '/activity/random'
+Blog App Route '/activity/:type'
 
 ```ruby
 
@@ -135,8 +137,6 @@ def self.type(type)
 end
 
 ```
-
-Blog App Route '/activity/:type'
 
 The following types can be entered for the request:
 
@@ -185,6 +185,8 @@ class Request
 The requests used are listed as follows:
 `Product::Client`
 
+Blog App Route '/products/:id'
+
 ```ruby
 
 def self.randomize
@@ -193,8 +195,6 @@ def self.randomize
 end
 
 ```
-
-Blog App Route '/products/:id'
 
 The api had **20** products that could be request at the time this project was made
 
